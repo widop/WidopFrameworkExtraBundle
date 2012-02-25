@@ -12,17 +12,17 @@
 namespace Widop\FrameworkExtraBundle\Configuration;
 
 /**
- * JSON template annotation.
+ * XML HTTP request annotation.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class JsonTemplate extends AbstractConfiguration
+class XmlHttpRequest extends AbstractConfiguration
 {
     /**
      * {@inheritdoc}
      */
     public function getAliasName()
     {
-        return 'json_template';
+        return 'xml_http_request';
     }
 }

@@ -11,18 +11,23 @@
 
 namespace Widop\FrameworkExtraBundle\Configuration;
 
+use Doctrine\Common\Annotations\Annotation;
+
 /**
- * JSON template annotation.
+ * Configuration.
+ *
+ * All configurations must extend this class.
  *
  * @author GeLo <geloen.eric@gmail.com>
+ *
+ * @Annotation
  */
-class JsonTemplate extends AbstractConfiguration
+abstract class AbstractConfiguration extends Annotation
 {
     /**
-     * {@inheritdoc}
+     * Gets the annotation alias.
+     *
+     * @return string
      */
-    public function getAliasName()
-    {
-        return 'json_template';
-    }
+    abstract public function getAliasName();
 }
