@@ -29,12 +29,16 @@ class JsonTemplateListener
      */
     public function onKernelView(GetResponseForControllerResultEvent $event)
     {
-        $parameters = $event->getControllerResult();
+        $annotations = $event->getRequest()->attributes->get('widop_framework_extra');
 
-        $response = new Response();
-        $response->headers->set('Content-type', 'application/json');
-        $response->setContent(json_encode($parameters));
+        if (in_array('json_template', array_keys($annotations))) {
+            $parameters = $event->getControllerResult();
 
-        $event->setResponse($response);
+            $response = new Response();
+            $response->headers->set('Content-type', 'application/json');
+            $response->setContent(json_encode($parameters));
+
+            $event->setResponse($response);
+        }
     }
 }
