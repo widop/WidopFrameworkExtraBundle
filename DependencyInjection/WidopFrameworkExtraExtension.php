@@ -32,6 +32,15 @@ class WidopFrameworkExtraExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('json_template.yml');
+
+        $files = array(
+            'configuration.yml',
+            'json_template.yml',
+            'xml_http_request.yml',
+        );
+
+        foreach ($files as $file) {
+            $loader->load($file);
+        }
     }
 }

@@ -1,0 +1,8 @@
+parameters:
+    widop_framework_extra.xml_http_request.listener.class: Widop\FrameworkExtraBundle\EventListener\XmlHttpRequestListener
+
+services:
+    widop_framework_extra.xml_http_request.listener:
+        class: %widop_framework_extra.xml_http_request.listener.class%
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
