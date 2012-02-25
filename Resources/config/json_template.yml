@@ -1,0 +1,8 @@
+parameters:
+    widop_framework_extra.json_template.listener.class: Widop\FrameworkExtraBundle\EventListener\JSONTemplateListener
+
+services:
+    widop_framework_extra.json_template.listener:
+        class: %widop_framework_extra.json_template.listener.class%
+        tags:
+            - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
