@@ -2,7 +2,8 @@ An extension to Symfony2 FrameworkBundle that adds annotation configuration for 
 
 The supported annotations are :
 
- - JsonTemplate: Converts the controller result to a JSON response.
+ - @XmlHttpRequest: Checks if the request is an XML HTTP Request.
+ - @JsonTemplate: Converts the controller result to a JSON response.
 
 # Installation
 
@@ -59,9 +60,29 @@ public function registerBundles()
 
 # Usage
 
-## Json Template Annotation
+## XML HTTP Request Annotation
 
-We learn more easily with an example, so:
+```` php
+<?php
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Widop\FrameworkExtraBundle\Configuration\XmlHttpRequest;
+
+class AnnotController extends Controller
+{
+    /**
+     * @XmlHttpRequest
+     */
+    public function indexAction()
+    {
+
+    }
+}
+````
+
+If the request is not an XML HTTP Request, an AccessDeniedException is thrown.
+
+## JSON Template Annotation
 
 ```` php
 <?php
