@@ -14,7 +14,12 @@ namespace Widop\FrameworkExtraBundle\EventListener;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
 use Symfony\Component\HttpFoundation\Response;
 
-class JSONTemplateListener
+/**
+ * JSON template listener.
+ *
+ * @author GeLo <geloen.eric@gmail.com>
+ */
+class JsonTemplateListener
 {
     /**
      * Creates a JSON Response and converts the controller result

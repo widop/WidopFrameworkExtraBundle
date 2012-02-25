@@ -16,6 +16,6 @@ namespace Widop\FrameworkExtraBundle\Configuration;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class JSONTemplate
+class JsonTemplate
 {  
 }
