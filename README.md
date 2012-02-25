@@ -1,7 +1,7 @@
 An extension to Symfony2 FrameworkBundle that adds annotation configuration for Controller classes.
 
 The supported annotations are :
-  * JSONTemplate: Converts the controller result to a JSON response.
+ - JsonTemplate: Converts the controller result to a JSON response.
 
 # Installation
 
@@ -58,7 +58,7 @@ public function registerBundles()
 
 # Usage
 
-## JSON template annotation
+## Json Template Annotation
 
 We learn more easily with an example, so:
 
@@ -66,12 +66,12 @@ We learn more easily with an example, so:
 <?php
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Widop\FrameworkExtraBundle\Configuration\JSONTemplate;
+use Widop\FrameworkExtraBundle\Configuration\JsonTemplate;
 
 class AnnotController extends Controller
 {
     /**
-     * @JSONTemplate
+     * @JsonTemplate
      */
     public function indexAction()
     {
