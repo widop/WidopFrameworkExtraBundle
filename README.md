@@ -1,6 +1,7 @@
 An extension to Symfony2 FrameworkBundle that adds annotation configuration for Controller classes.
 
 The supported annotations are :
+
  - JsonTemplate: Converts the controller result to a JSON response.
 
 # Installation
