@@ -27,7 +27,24 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('widop_framework_extra');
+        $rootNode = $treeBuilder->root('widop_framework_extra');
+
+        $rootNode
+            ->children()
+                ->arrayNode('xml_http_request')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('annotations')->defaultTrue()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('json_template')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('annotations')->defaultTrue()->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
