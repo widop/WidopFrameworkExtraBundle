@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Bundle configuration extension.
@@ -31,16 +32,28 @@ class WidopFrameworkExtraExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $processor = new Processor();
+        $configuration = new Configuration();
+
+        $config = $processor->processConfiguration($configuration, $configs);
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $files = array(
-            'configuration.yml',
-            'json_template.yml',
-            'xml_http_request.yml',
-        );
+        $annotationsToLoad = array();
 
-        foreach ($files as $file) {
-            $loader->load($file);
+        if ($config['xml_http_request']['annotations'] === true) {
+            $annotationsToLoad[] = 'xml_http_request.yml';
+        }
+
+        if ($config['json_template']['annotations'] === true) {
+            $annotationsToLoad[] = 'json_template.yml';
+        }
+
+        if (!empty($annotationsToLoad)) {
+            $loader->load('configuration.yml');
+
+            foreach ($annotationsToLoad as $annotationToLoad) {
+                $loader->load($annotationToLoad);
+            }
         }
     }
 }
