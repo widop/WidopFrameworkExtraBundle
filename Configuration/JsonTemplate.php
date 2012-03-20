@@ -15,6 +15,8 @@ namespace Widop\FrameworkExtraBundle\Configuration;
  * JSON template annotation.
  *
  * @author GeLo <geloen.eric@gmail.com>
+ *
+ * @Annotation
  */
 class JsonTemplate extends AbstractConfiguration
 {

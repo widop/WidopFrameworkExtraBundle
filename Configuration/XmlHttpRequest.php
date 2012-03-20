@@ -15,6 +15,8 @@ namespace Widop\FrameworkExtraBundle\Configuration;
  * XML HTTP request annotation.
  *
  * @author GeLo <geloen.eric@gmail.com>
+ *
+ * @Annotation
  */
 class XmlHttpRequest extends AbstractConfiguration
 {
