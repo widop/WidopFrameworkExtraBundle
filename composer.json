@@ -1,0 +1,21 @@
+{
+    "name": "widop/framework-extra-bundle",
+    "description": "An extension to Symfony2 FrameworkBundle that adds annotation configuration for Controller classes.",
+    "keywords": ["annotations","controllers"],
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Widop",
+            "email": "contact@widop.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*",
+        "doctrine/common": ">=2.0"
+    },
+    "autoload": {
+        "psr-0": { "Widop\\FrameworkExtraBundle": "" }
+    },
+    "target-dir": "Widop/FrameworkExtraBundle"
+}
