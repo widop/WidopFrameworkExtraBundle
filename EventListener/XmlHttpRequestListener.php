@@ -11,8 +11,8 @@
 
 namespace Widop\FrameworkExtraBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent,
+    Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * XML HTTP request listener.
@@ -33,7 +33,7 @@ class XmlHttpRequestListener
 
         if (in_array('xml_http_request', array_keys($annotations))) {
             if (!$event->getRequest()->isXmlHttpRequest()) {
-                throw new AccessDeniedException();
+                throw new NotFoundHttpException();
             }
         }
     }
