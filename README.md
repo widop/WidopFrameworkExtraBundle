@@ -95,7 +95,7 @@ class AnnotController extends Controller
 }
 ````
 
-If the request is not an XML HTTP Request, an AccessDeniedException is thrown.
+If the request is not an XML HTTP Request, an NotFoundHttpException is thrown.
 
 ## JSON Template Annotation
 
