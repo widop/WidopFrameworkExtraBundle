@@ -13,6 +13,11 @@ namespace Widop\FrameworkExtraBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
+/**
+ * Widop framework extra bundle.
+ *
+ * @author GeLo <geloen.eric@gmail.com>
+ */
 class WidopFrameworkExtraBundle extends Bundle
 {
 }

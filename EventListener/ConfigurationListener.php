@@ -45,7 +45,7 @@ class ConfigurationListener
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
-        
+
         $object = new \ReflectionObject($controller[0]);
         $method = $object->getMethod($controller[1]);
 

@@ -43,8 +43,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('annotations')->defaultTrue()->end()
                     ->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }

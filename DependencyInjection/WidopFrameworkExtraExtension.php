@@ -27,7 +27,7 @@ class WidopFrameworkExtraExtension extends Extension
     /**
      * Loads the bundle configuration.
      *
-     * @param array $configs The configuration.
+     * @param array            $configs   The configuration.
      * @param ContainerBuilder $container The container builder.
      */
     public function load(array $configs, ContainerBuilder $container)
