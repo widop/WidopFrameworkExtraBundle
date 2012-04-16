@@ -1,9 +1,9 @@
-An extension to Symfony2 FrameworkBundle that adds annotation configuration for Controller classes.
+Adds annotation configuration for Controller classes.
 
 The supported annotations are :
 
- - @XmlHttpRequest: Checks if the request is an XML HTTP Request.
- - @JsonTemplate: Converts the controller result to a JSON response.
+ - `@XmlHttpRequest` Checks if the request is an XML HTTP Request.
+ - `@JsonTemplate` Converts the controller result to a JSON response.
 
 Documentation
 -------------
