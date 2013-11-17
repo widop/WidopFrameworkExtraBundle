@@ -11,30 +11,43 @@
 
 namespace Widop\FrameworkExtraBundle\EventListener;
 
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent,
-    Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Widop\FrameworkExtraBundle\Configuration\XmlHttpRequest;
 
 /**
  * XML HTTP request listener.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class XmlHttpRequestListener
+class XmlHttpRequestListener implements EventSubscriberInterface
 {
     /**
-     * Checks if the request is an XML HTTP request.
-     * If it is not, an AccessDeniedException is thrown.
+     * Handles a kernel controller event by Checking if the request is an XML HTTP one
+     * according to the request attributes.
      *
-     * @param GetResponseForControllerResultEvent $event The event.
+     * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event The event.
+     *
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException If the request is not an XML HTTP one.
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function handle(FilterControllerEvent $event)
     {
-        $annotations = $event->getRequest()->attributes->get('widop_framework_extra');
+        $annotations = $event->getRequest()->attributes->get(ConfigurationListener::ALIAS_NAME, array());
 
-        if (in_array('xml_http_request', array_keys($annotations))) {
-            if (!$event->getRequest()->isXmlHttpRequest()) {
-                throw new NotFoundHttpException();
-            }
+        if (isset($annotations[XmlHttpRequest::ALIAS_NAME]) && !$event->getRequest()->isXmlHttpRequest()) {
+            throw new NotFoundHttpException();
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::CONTROLLER => 'handle',
+        );
     }
 }

@@ -1,9 +1,0 @@
-parameters:
-    widop_framework_extra.configuration.listener.class: Widop\FrameworkExtraBundle\EventListener\ConfigurationListener
-
-services:
-    widop_framework_extra.configuration.listener:
-        class: %widop_framework_extra.configuration.listener.class%
-        arguments: [ @annotation_reader ]
-        tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

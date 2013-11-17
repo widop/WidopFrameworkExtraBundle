@@ -12,7 +12,9 @@
 namespace Widop\FrameworkExtraBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Symfony\Component\HttpKernel\KernelEvents;
 use Widop\FrameworkExtraBundle\Configuration\AbstractConfiguration;
 
 /**
@@ -20,17 +22,18 @@ use Widop\FrameworkExtraBundle\Configuration\AbstractConfiguration;
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class ConfigurationListener
+class ConfigurationListener implements EventSubscriberInterface
 {
-    /**
-     * @var \Doctrine\Common\Annotations\Reader
-     */
+    /** @const string */
+    const ALIAS_NAME = 'widop_framework_extra';
+
+    /** @var \Doctrine\Common\Annotations\Reader */
     protected $reader;
 
     /**
-     * Constructor.
+     * Creates a configuration listener.
      *
-     * @param Reader $reader A Reader instance
+     * @param \Doctrine\Common\Annotations\Reader $reader The annotation reader.
      */
     public function __construct(Reader $reader)
     {
@@ -38,13 +41,16 @@ class ConfigurationListener
     }
 
     /**
-     * Adds an attribute to the request that enables the enabled configuration behaviors.
+     * Handles a kernel controller event by adding a request attribute
+     * that enables the appropriate configuration behaviors.
      *
-     * @param FilterControllerEvent $event A FilterControllerEvent instance
+     * @param \Symfony\Component\HttpKernel\Event\FilterControllerEvent $event The event.
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function handle(FilterControllerEvent $event)
     {
-        $controller = $event->getController();
+        if (!is_array($controller = $event->getController())) {
+            return;
+        }
 
         $object = new \ReflectionObject($controller[0]);
         $method = $object->getMethod($controller[1]);
@@ -58,6 +64,16 @@ class ConfigurationListener
             }
         }
 
-        $event->getRequest()->attributes->set('widop_framework_extra', $widopConfigurations);
+        $event->getRequest()->attributes->set(self::ALIAS_NAME, $widopConfigurations);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::CONTROLLER => 'handle',
+        );
     }
 }

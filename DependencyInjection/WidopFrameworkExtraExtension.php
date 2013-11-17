@@ -12,10 +12,9 @@
 namespace Widop\FrameworkExtraBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
-use Symfony\Component\Config\Definition\Processor;
 
 /**
  * Bundle configuration extension.
@@ -25,35 +24,29 @@ use Symfony\Component\Config\Definition\Processor;
 class WidopFrameworkExtraExtension extends Extension
 {
     /**
-     * Loads the bundle configuration.
-     *
-     * @param array            $configs   The configuration.
-     * @param ContainerBuilder $container The container builder.
+     * {@inheritdoc}
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $configuration = new Configuration();
+        $config = $this->processConfiguration(new Configuration(), $configs);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $config = $processor->processConfiguration($configuration, $configs);
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $resources = array();
 
-        $annotationsToLoad = array();
-
-        if ($config['xml_http_request']['annotations'] === true) {
-            $annotationsToLoad[] = 'xml_http_request.yml';
+        if ($config['xml_http_request']) {
+            $resources[] = 'xml_http_request';
         }
 
-        if ($config['json_template']['annotations'] === true) {
-            $annotationsToLoad[] = 'json_template.yml';
+        if ($config['json_template']) {
+            $resources[] = 'json_template';
         }
 
-        if (!empty($annotationsToLoad)) {
-            $loader->load('configuration.yml');
+        if (!empty($resources)) {
+            $resources[] = 'configuration';
+        }
 
-            foreach ($annotationsToLoad as $annotationToLoad) {
-                $loader->load($annotationToLoad);
-            }
+        foreach ($resources as $resource) {
+            $loader->load($resource.'.xml');
         }
     }
 }

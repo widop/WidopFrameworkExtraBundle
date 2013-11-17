@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container
+    xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd"
+>
+    <parameters>
+        <parameter key="widop_framework_extra.xml_http_request.listener.class">Widop\FrameworkExtraBundle\EventListener\XmlHttpRequestListener</parameter>
+    </parameters>
+
+    <services>
+        <service
+            id="widop_framework_extra.xml_http_request.listener"
+            class="%widop_framework_extra.xml_http_request.listener.class%"
+        >
+            <tag name="kernel.event_subscriber" />
+        </service>
+    </services>
+</container>

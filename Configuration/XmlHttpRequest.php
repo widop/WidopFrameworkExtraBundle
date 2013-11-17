@@ -14,17 +14,20 @@ namespace Widop\FrameworkExtraBundle\Configuration;
 /**
  * XML HTTP request annotation.
  *
- * @author GeLo <geloen.eric@gmail.com>
- *
  * @Annotation
+ *
+ * @author GeLo <geloen.eric@gmail.com>
  */
 class XmlHttpRequest extends AbstractConfiguration
 {
+    /** @const string */
+    const ALIAS_NAME = 'xml_http_request';
+
     /**
      * {@inheritdoc}
      */
     public function getAliasName()
     {
-        return 'xml_http_request';
+        return self::ALIAS_NAME;
     }
 }

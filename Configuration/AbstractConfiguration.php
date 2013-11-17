@@ -16,8 +16,6 @@ use Doctrine\Common\Annotations\Annotation;
 /**
  * Configuration.
  *
- * All configurations must extend this class.
- *
  * @author GeLo <geloen.eric@gmail.com>
  */
 abstract class AbstractConfiguration extends Annotation
