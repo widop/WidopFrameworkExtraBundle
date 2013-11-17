@@ -42,7 +42,7 @@ class WidopFrameworkExtraExtension extends Extension
         }
 
         if (!empty($resources)) {
-            $resources[] = 'configuration';
+            array_unshift($resources, 'configuration');
         }
 
         foreach ($resources as $resource) {
