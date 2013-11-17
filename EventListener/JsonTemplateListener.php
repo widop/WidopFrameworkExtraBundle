@@ -11,34 +11,40 @@
 
 namespace Widop\FrameworkExtraBundle\EventListener;
 
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Widop\FrameworkExtraBundle\Configuration\JsonTemplate;
 
 /**
  * JSON template listener.
  *
  * @author GeLo <geloen.eric@gmail.com>
  */
-class JsonTemplateListener
+class JsonTemplateListener implements EventSubscriberInterface
 {
     /**
-     * Creates a JSON Response and converts the controller result
-     * to a JSON object.
+     * Handles a JSON response according to the request attributes.
      *
-     * @param GetResponseForControllerResultEvent $event The event.
+     * @param \Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent $event The event.
      */
-    public function onKernelView(GetResponseForControllerResultEvent $event)
+    public function handle(GetResponseForControllerResultEvent $event)
     {
-        $annotations = $event->getRequest()->attributes->get('widop_framework_extra');
+        $annotations = $event->getRequest()->attributes->get(ConfigurationListener::ALIAS_NAME, array());
 
-        if (in_array('json_template', array_keys($annotations))) {
-            $parameters = $event->getControllerResult();
-
-            $response = new Response();
-            $response->headers->set('Content-type', 'application/json');
-            $response->setContent(json_encode($parameters));
-
-            $event->setResponse($response);
+        if (isset($annotations[JsonTemplate::ALIAS_NAME])) {
+            $event->setResponse(new JsonResponse($event->getControllerResult()));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getSubscribedEvents()
+    {
+        return array(
+            KernelEvents::VIEW => 'handle',
+        );
     }
 }

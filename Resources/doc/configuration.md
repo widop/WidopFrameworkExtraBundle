@@ -1,14 +1,12 @@
 # Configuration
 
-All features provided by the bundle are enabled by default when the bundle is registered in your Kernel class.
-The default configuration is as follow:
+All features provided by the bundle are disabled by default for performance reason. If you want to enable them,
+you can use the following configuration:
 
 ``` yaml
 # app/config/config.yml
 
 widop_framework_extra:
-    xml_http_request: { annotations: true }
-    json_template:    { annotations: true }
+    xml_http_request: true
+    json_template:    true
 ```
-
-You can disable some annotations by defining one or more settings to false.

@@ -14,17 +14,20 @@ namespace Widop\FrameworkExtraBundle\Configuration;
 /**
  * JSON template annotation.
  *
- * @author GeLo <geloen.eric@gmail.com>
- *
  * @Annotation
+ *
+ * @author GeLo <geloen.eric@gmail.com>
  */
 class JsonTemplate extends AbstractConfiguration
 {
+    /** @const string */
+    const ALIAS_NAME = 'json_template';
+
     /**
      * {@inheritdoc}
      */
     public function getAliasName()
     {
-        return 'json_template';
+        return self::ALIAS_NAME;
     }
 }
