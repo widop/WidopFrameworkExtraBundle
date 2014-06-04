@@ -12,6 +12,7 @@
 namespace Widop\FrameworkExtraBundle\EventListener;
 
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Util\ClassUtils;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -52,7 +53,7 @@ class ConfigurationListener implements EventSubscriberInterface
             return;
         }
 
-        $object = new \ReflectionObject($controller[0]);
+        $object = new \ReflectionClass(ClassUtils::getClass($controller[0]));
         $method = $object->getMethod($controller[1]);
 
         $configurations = $this->reader->getMethodAnnotations($method);
