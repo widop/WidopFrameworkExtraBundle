@@ -1,6 +1,6 @@
 # CHANGELOG
 
-### 1.0.2 (????-??-??)
+### 1.0.2 (2014-06-04)
 
  * f007f23 - [Fix] Controller class detection
 
