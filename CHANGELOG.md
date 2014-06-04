@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 1.0.2 (????-??-??)
+
+ * f007f23 - [Fix] Controller class detection
+
 ### 1.0.1 (2013-11-17)
 
  * ad09f1f - Fix listener priorities
